@@ -1,9 +1,14 @@
 import json
+from dataclasses import dataclass
+from typing import List
 
 from CompiledFile import CompiledFile
 
-
+@dataclass
 class Input:
+    targets:List
+    servers:List
+
     def __init__(self, targets, servers, compiled_files):
         self.targets = targets
         self.servers = servers
