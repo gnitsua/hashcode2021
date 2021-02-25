@@ -2,8 +2,9 @@ from Input import Input
 from Solver import Solver
 
 if __name__ == "__main__":
-    input = Input.parse("a")
+    for file in "abcdef":
+        input = Input.parse(file)
 
-    solver = Solver(input)
+        solver = Solver(input)
 
-    solution = solver.solve()
+        solution = solver.solve()

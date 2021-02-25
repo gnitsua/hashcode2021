@@ -81,6 +81,7 @@ class Solver:
             for pair in Counter(intersection.schedule).items():
                 result += "%s %s\n"%(pair[0], pair[1])
 
-        print(result)
+        with open("results/" + self.input.name + ".txt", "w") as file:
+            file.write(result)
 
 
