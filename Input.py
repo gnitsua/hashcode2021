@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 from typing import List
 
-from Route import Route
+from Car import Car
 from Street import Street
 
 
@@ -22,21 +22,26 @@ class Input:
 
             simTime, numIntersections, numStreets, numCars, scorePerCar = inputInfoLine
 
-            intersections = {}
+            streets = {}
             for _ in range(0, lineCount - int(numCars) - 1):  # read in the intersections
                 intersectionInfoLine = file.readline().strip("\n").split(" ")
                 assert (len(intersectionInfoLine) == 4)
 
-                intersections[intersectionInfoLine[2]] = Street(int(intersectionInfoLine[0]),
+                streets[intersectionInfoLine[2]] = Street(int(intersectionInfoLine[0]),
                                             int(intersectionInfoLine[1]),
                                             intersectionInfoLine[2],
                                             int(intersectionInfoLine[3]))
 
-            routes = []
+            cars = []
             for _ in range(0, int(numCars) - 1):
                 routeInfoLine = file.readline().strip("\n").split(" ")
                 numSteps = int(routeInfoLine[0])
                 assert (numSteps == len(routeInfoLine) - 1)
-                routes.append(Route(routeInfoLine[1:]))
+                car = Car(routeInfoLine[1:])
+                start = car.route[0]
+                streets[start].segments[-1].append(car)
+                # print(streets)
 
-            return Input(filename, int(simTime), intersections, routes, int(scorePerCar))
+
+            return Input(filename, int(simTime), streets, cars, int(scorePerCar))
+

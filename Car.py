@@ -3,5 +3,5 @@ from typing import List
 
 
 @dataclass
-class Route:
-    path: List
+class Car:
+    route: List
